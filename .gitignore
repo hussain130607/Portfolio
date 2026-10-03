@@ -1,0 +1,7 @@
+node_modules/
+
+# The book is private: previews are deployed with wrangler but never committed
+book/
+app-src/build_book.py
+app-src/build_preview.py
+.wrangler/

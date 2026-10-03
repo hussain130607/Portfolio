@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout | Gift R</title>
+  <meta name="description" content="Securely complete your Gift R order." />
+  <meta name="theme-color" content="#e91e63" />
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <!-- Data API host, kept in step with SUPABASE_URL in js/config.js -->
+  <link rel="preconnect" href="https://npophaagzrkjxqoqqtzj.supabase.co" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=2" />
+</head>
+<body data-page="checkout">
+  <div id="site-header"></div>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <ol class="breadcrumb" aria-label="Breadcrumb">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="cart.html">Cart</a></li>
+          <li aria-current="page">Checkout</li>
+        </ol>
+        <h1>Secure Checkout</h1>
+        <p>Just a few details and your gifts will be on their way.</p>
+      </div>
+    </section>
+
+    <section class="section--tight">
+      <div class="container" id="checkoutRoot">
+        <div class="checkout-layout">
+          <form id="checkoutForm" novalidate>
+            <!-- 1. Contact -->
+            <div class="card">
+              <h2 class="card__title"><span class="step-num">1</span> Contact Information</h2>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="firstName">First name <span class="req">*</span></label>
+                  <input id="firstName" autocomplete="given-name" data-validate="required" />
+                  <span class="error-msg">Please enter your first name.</span>
+                </div>
+                <div class="field">
+                  <label for="lastName">Last name <span class="req">*</span></label>
+                  <input id="lastName" autocomplete="family-name" data-validate="required" />
+                  <span class="error-msg">Please enter your last name.</span>
+                </div>
+                <div class="field">
+                  <label for="email">Email <span class="req">*</span></label>
+                  <input id="email" type="email" autocomplete="email" data-validate="required email" />
+                  <span class="error-msg">Please enter a valid email address.</span>
+                </div>
+                <div class="field">
+                  <label for="phone">Phone <span class="req">*</span></label>
+                  <input id="phone" type="tel" autocomplete="tel" data-validate="required phone" />
+                  <span class="error-msg">Please enter a valid phone number.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Shipping -->
+            <div class="card">
+              <h2 class="card__title"><span class="step-num">2</span> Shipping Address</h2>
+              <div class="form-grid">
+                <div class="field full">
+                  <label for="address">Street address <span class="req">*</span></label>
+                  <input id="address" autocomplete="street-address" data-validate="required" />
+                  <span class="error-msg">Please enter your street address.</span>
+                </div>
+                <div class="field">
+                  <label for="city">City <span class="req">*</span></label>
+                  <input id="city" autocomplete="address-level2" data-validate="required" />
+                  <span class="error-msg">Please enter your city.</span>
+                </div>
+                <div class="field">
+                  <label for="zip">Postal / ZIP code <span class="req">*</span></label>
+                  <input id="zip" autocomplete="postal-code" data-validate="required zip" />
+                  <span class="error-msg">Please enter a valid postal code.</span>
+                </div>
+                <div class="field full">
+                  <label for="country">Country <span class="req">*</span></label>
+                  <select id="country" autocomplete="country-name" data-validate="required">
+                    <option value="">Select a country…</option>
+                    <option selected>Bangladesh</option>
+                    <option>India</option>
+                    <option>Pakistan</option>
+                    <option>United Arab Emirates</option>
+                    <option>Saudi Arabia</option>
+                    <option>Malaysia</option>
+                    <option>United Kingdom</option>
+                    <option>United States</option>
+                  </select>
+                  <span class="error-msg">Please select a country.</span>
+                </div>
+                <div class="full">
+                  <label class="check"><input type="checkbox" id="isGift" /> This order is a gift — send it directly to someone else</label>
+                </div>
+                <div class="full form-grid" id="giftFields" hidden>
+                  <div class="field">
+                    <label for="recipient">Recipient's name <span class="req">*</span></label>
+                    <input id="recipient" data-validate="required" />
+                    <span class="error-msg">Please enter the recipient's name.</span>
+                  </div>
+                  <div class="field">
+                    <label for="deliveryDate">Preferred delivery date</label>
+                    <input id="deliveryDate" type="date" />
+                  </div>
+                  <div class="field full">
+                    <label for="giftNote">Gift card message</label>
+                    <textarea id="giftNote" maxlength="200" placeholder="Write a heartfelt note (we'll handwrite it for you)…" style="min-height:90px"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Delivery -->
+            <div class="card">
+              <h2 class="card__title"><span class="step-num">3</span> Delivery Method</h2>
+              <div class="radio-cards">
+                <label class="radio-card">
+                  <input type="radio" name="shipping" value="standard" checked />
+                  <span class="radio-card__text"><strong>Standard Delivery</strong><small>2–4 working days, anywhere in Bangladesh</small></span>
+                  <span class="radio-card__price" id="stdPrice">৳80</span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="shipping" value="express" />
+                  <span class="radio-card__text"><strong>Express Delivery</strong><small>Next-day delivery</small></span>
+                  <span class="radio-card__price" id="expPrice">৳150</span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="shipping" value="pickup" />
+                  <span class="radio-card__text"><strong>Store Pickup</strong><small>Collect from our Cumilla shop</small></span>
+                  <span class="radio-card__price">Free</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- 4. Payment -->
+            <div class="card">
+              <h2 class="card__title"><span class="step-num">4</span> Payment</h2>
+              <div class="radio-cards">
+                <label class="radio-card">
+                  <input type="radio" name="payment" value="card" checked />
+                  <span class="radio-card__text"><strong>Credit / Debit Card</strong><small>VISA, Mastercard, AMEX</small></span>
+                  <span class="pay-emblem"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20M6 15h4"/></svg></span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="payment" value="mobile" />
+                  <span class="radio-card__text"><strong>Mobile Banking</strong><small>bKash · Nagad · Rocket</small></span>
+                  <span class="pay-emblem"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="payment" value="cod" />
+                  <span class="radio-card__text"><strong>Cash on Delivery</strong><small>Pay when your gift arrives</small></span>
+                  <span class="pay-emblem"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg></span>
+                </label>
+              </div>
+
+              <div class="pay-fields form-grid" data-pay="card">
+                <div class="field full">
+                  <label for="cardName">Name on card <span class="req">*</span></label>
+                  <input id="cardName" autocomplete="cc-name" data-validate="required" />
+                  <span class="error-msg">Please enter the name on your card.</span>
+                </div>
+                <div class="field full">
+                  <label for="cardNumber">Card number <span class="req">*</span></label>
+                  <input id="cardNumber" inputmode="numeric" autocomplete="cc-number" placeholder="4242 4242 4242 4242" data-validate="required card" />
+                  <span class="error-msg">Please enter a valid card number (try 4242 4242 4242 4242 for this demo).</span>
+                </div>
+                <div class="field">
+                  <label for="cardExpiry">Expiry (MM / YY) <span class="req">*</span></label>
+                  <input id="cardExpiry" inputmode="numeric" autocomplete="cc-exp" placeholder="MM / YY" data-validate="required expiry" />
+                  <span class="error-msg">Please enter a valid future expiry date.</span>
+                </div>
+                <div class="field">
+                  <label for="cardCvc">CVC <span class="req">*</span></label>
+                  <input id="cardCvc" inputmode="numeric" autocomplete="cc-csc" placeholder="123" data-validate="required cvc" />
+                  <span class="error-msg">Please enter a 3–4 digit CVC.</span>
+                </div>
+              </div>
+              <p class="pay-fields form-hint" data-pay="mobile" hidden>Send the total to our merchant number <strong>+880 1712-345678</strong> (bKash / Nagad / Rocket) and reply to the confirmation SMS with your transaction ID.</p>
+              <p class="pay-fields form-hint" data-pay="cod" hidden>Please keep the exact amount ready. We will call to confirm your order before dispatch.</p>
+            </div>
+
+            <p class="form-hint" style="margin-top:16px"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg> This is a demo store — no real payment is processed.</p>
+          </form>
+
+          <aside class="summary" id="checkoutSummary" aria-label="Order summary"></aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/dist/umd/supabase.js"></script>
+  <script src="js/config.js?v=2"></script>
+  <script src="js/products.js?v=2"></script>
+  <script src="js/api.js?v=2"></script>
+  <script src="js/main.js?v=2"></script>
+</body>
+</html>

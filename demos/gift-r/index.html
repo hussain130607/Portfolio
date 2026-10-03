@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gift R | Making Every Moment Special</title>
+  <meta name="description" content="Gift R — premium gifts, flowers, cakes, soft toys and personalized presents delivered across Bangladesh." />
+  <meta name="theme-color" content="#e91e63" />
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <!-- Data API host, kept in step with SUPABASE_URL in js/config.js -->
+  <link rel="preconnect" href="https://npophaagzrkjxqoqqtzj.supabase.co" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=2" />
+</head>
+<body data-page="home">
+  <div id="site-header"></div>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero__grid">
+        <div>
+          <span class="hero__eyebrow"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg> Welcome to Gift R</span>
+          <h1 id="heroTitle">Find The Perfect Gift <em>For Every Occasion</em></h1>
+          <p class="hero__lead" id="heroLead">
+            Explore our amazing collection of gifts for birthdays, anniversaries, special days and just because!
+          </p>
+          <div class="hero__cta">
+            <a href="shop.html" class="btn btn--primary"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/><path d="M2 3h2.2l2.3 11.2a1.6 1.6 0 0 0 1.6 1.3h8.6a1.6 1.6 0 0 0 1.6-1.3L20 7H5"/></svg> Shop Now</a>
+            <a href="#categories" class="btn btn--outline"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg> Explore Categories</a>
+          </div>
+        </div>
+
+        <div class="hero__visual">
+          <img src="images/hero.jpg" alt="A gift box tied with a pink satin ribbon" width="1000" height="820" fetchpriority="high" decoding="async" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Category strip -->
+    <section class="cat-strip" id="categories">
+      <div class="container">
+        <div class="cat-strip__inner" id="catStrip"></div>
+      </div>
+    </section>
+
+    <!-- Featured products -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head section-head--row">
+          <div>
+            <span class="eyebrow">Our best picks</span>
+            <h2>Featured Products</h2>
+          </div>
+          <a href="shop.html" class="btn btn--outline btn--sm">View All Products →</a>
+        </div>
+        <div class="product-grid" id="featuredProducts"></div>
+      </div>
+    </section>
+
+    <!-- Trust band -->
+    <section class="section--tight">
+      <div class="container">
+        <div class="features-band">
+          <div class="feature">
+            <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h11v11H2z"/><path d="M13 9h4l4 4v4h-8"/><circle cx="7" cy="18.5" r="1.8"/><circle cx="17.5" cy="18.5" r="1.8"/></svg></div>
+            <div><strong>Fast Delivery</strong><span>We deliver your gifts at your doorstep</span></div>
+          </div>
+          <div class="feature">
+            <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.4 3.3 8.3 8 9 4.7-.7 8-4.6 8-9V6Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+            <div><strong>Secure Payment</strong><span>100% secure payment guarantee</span></div>
+          </div>
+          <div class="feature">
+            <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-2.5 5 2.5-1.5-7"/></svg></div>
+            <div><strong>Best Quality</strong><span>Premium quality products for you</span></div>
+          </div>
+          <div class="feature">
+            <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="2" y="13" width="4" height="6" rx="1.6"/><rect x="18" y="13" width="4" height="6" rx="1.6"/><path d="M20 19v1a3 3 0 0 1-3 3h-3"/></svg></div>
+            <div><strong>24/7 Support</strong><span>We are here to help you anytime</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Shop by occasion -->
+    <section class="section section--blush">
+      <div class="container">
+        <div class="section-head section-head--center reveal">
+          <span class="eyebrow">Shop by occasion</span>
+          <h2>Gifts For Every Celebration</h2>
+          <div class="divider">✦</div>
+          <p>Whatever the moment, we have something wonderful waiting to be unwrapped.</p>
+        </div>
+        <div class="cat-grid" id="homeCategories"></div>
+      </div>
+    </section>
+
+    <!-- Best sellers -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head section-head--row">
+          <div>
+            <span class="eyebrow">Most loved</span>
+            <h2>Best Sellers</h2>
+          </div>
+          <a href="shop.html" class="btn btn--outline btn--sm">Browse All →</a>
+        </div>
+        <div class="product-grid" id="bestSellers"></div>
+      </div>
+    </section>
+
+    <!-- Promo -->
+    <section class="section--tight">
+      <div class="container">
+        <div class="promo reveal">
+          <div style="position:relative;z-index:1">
+            <span class="eyebrow">Limited time offer</span>
+            <h2>10% off your first gift order</h2>
+            <p>Welcome to the Gift R family! Use the code below at checkout and make someone's day a little brighter for less.</p>
+            <a href="shop.html" class="btn btn--gold">Start Gifting</a>
+          </div>
+          <div class="promo__code">
+            <small>Your welcome code</small>
+            <strong id="promoCodeText">GIFTR10</strong>
+            <small>Valid on all categories</small>
+            <button class="btn btn--ghost btn--sm" id="copyCode" type="button">Copy Code</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head section-head--center reveal">
+          <span class="eyebrow">Kind words</span>
+          <h2>Smiles Delivered</h2>
+          <div class="divider">✦</div>
+        </div>
+        <div class="testimonials">
+          <figure class="testimonial reveal" style="margin:0">
+            <div class="stars">★★★★★</div>
+            <p>“The rose bouquet reached my wife exactly at 9am on our anniversary. Fresh flowers, beautiful wrapping — she was so happy!”</p>
+            <figcaption class="testimonial__who"><span class="avatar">SR</span><div><strong>Sabbir R.</strong><span>Anniversary gift</span></div></figcaption>
+          </figure>
+          <figure class="testimonial reveal" style="margin:0">
+            <div class="stars">★★★★★</div>
+            <p>“Ordered the luxury hamper for my sister in Cumilla and it arrived the very next day. Packaging was premium quality.”</p>
+            <figcaption class="testimonial__who"><span class="avatar">NA</span><div><strong>Nusrat A.</strong><span>Gift hamper</span></div></figcaption>
+          </figure>
+          <figure class="testimonial reveal" style="margin:0">
+            <div class="stars">★★★★★</div>
+            <p>“The personalized photo mug came out even better than the preview. Great print quality and very fast service.”</p>
+            <figcaption class="testimonial__who"><span class="avatar">TH</span><div><strong>Tanvir H.</strong><span>Personalized gift</span></div></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="section--tight">
+      <div class="container">
+        <div class="newsletter reveal">
+          <span class="eyebrow">Join the Gift R family</span>
+          <h2>Never miss a special occasion</h2>
+          <p>Subscribe for gift ideas, festive offers and early access to new collections.</p>
+          <form class="inline-form js-newsletter" novalidate>
+            <label class="sr-only" for="newsEmail">Email address</label>
+            <input type="email" id="newsEmail" placeholder="Enter your email address" required />
+            <button class="btn btn--primary" type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/dist/umd/supabase.js"></script>
+  <script src="js/config.js?v=2"></script>
+  <script src="js/products.js?v=2"></script>
+  <script src="js/api.js?v=2"></script>
+  <script src="js/main.js?v=2"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sprint Board</title>
+<style>
+:root{--bg:#f5f4f8;--col:#ebe9f2;--card:#fff;--line:#d8d5e4;--fg:#1a1726;--muted:#6a6580;--acc:#5b4bd6;--hi:#d9480f;--md:#c08a00;--lo:#2b8a3e;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#100e18;--col:#18152a;--card:#221e38;--line:#302b4d;--fg:#ece9f8;--muted:#9d97ba;--acc:#9b8cff;--hi:#ff8a5c;--md:#f0c14b;--lo:#69db7c;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.5 system-ui,"Segoe UI",sans-serif;padding:16px}
+header{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;margin-bottom:14px}
+h1{margin:0;font-size:19px}
+form{display:flex;gap:8px;flex-wrap:wrap}
+input,select{font:inherit;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--fg)}
+input{min-width:0;flex:1 1 180px}
+button{font:600 14px system-ui;border:0;border-radius:8px;padding:8px 14px;background:var(--acc);color:#fff;cursor:pointer}
+.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.board{grid-template-columns:1fr}}
+.col{background:var(--col);border-radius:12px;padding:10px;display:grid;gap:8px;align-content:start;min-height:160px;border:2px dashed transparent}
+.col.over{border-color:var(--acc)}
+.col h2{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:2px 4px;display:flex;justify-content:space-between}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:grab;display:grid;gap:6px}
+.card.drag{opacity:.4}
+.meta{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
+.p{font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+.p.high{color:var(--hi)}.p.med{color:var(--md)}.p.low{color:var(--lo)}
+.mv{background:none;color:var(--muted);padding:0 4px;font-size:15px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Sprint Board</h1>
+  <form id="f"><input id="t" required placeholder="New task, e.g. Add dark mode"><select id="p"><option value="high">High</option><option value="med" selected>Medium</option><option value="low">Low</option></select><button>Add</button></form>
+</header>
+<div class="board" id="board"></div>
+<script>
+const COLS=[["todo","To do"],["doing","In progress"],["done","Done"]];
+const KEY="sprint-board-v1";
+const SAMPLE=[{id:1,t:"Design product detail screen",p:"high",c:"done"},{id:2,t:"Hook cart to Firestore",p:"high",c:"doing"},{id:3,t:"Add Bangla translations",p:"med",c:"doing"},{id:4,t:"Write widget tests for checkout",p:"med",c:"todo"},{id:5,t:"Splash screen animation",p:"low",c:"todo"}];
+let tasks; try{tasks=JSON.parse(localStorage.getItem(KEY))}catch(e){} if(!Array.isArray(tasks)) tasks=SAMPLE.slice();
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(tasks))}catch(e){}};
+let dragId=null;
+function draw(){
+  board.innerHTML=COLS.map(([k,n],ci)=>`<section class="col" data-c="${k}"><h2>${n}<span>${tasks.filter(x=>x.c===k).length}</span></h2>${tasks.filter(x=>x.c===k).map(x=>`<article class="card" draggable="true" data-id="${x.id}"><div>${x.t.replace(/</g,"&lt;")}</div><div class="meta"><span class="p ${x.p}">${x.p==="med"?"medium":x.p}</span><span>${ci>0?`<button class="mv" data-id="${x.id}" data-d="-1" aria-label="Move left">←</button>`:""}${ci<2?`<button class="mv" data-id="${x.id}" data-d="1" aria-label="Move right">→</button>`:`<button class="mv" data-id="${x.id}" data-d="x" aria-label="Remove">×</button>`}</span></div></article>`).join("")}</section>`).join("");
+}
+board.addEventListener("dragstart",e=>{const c=e.target.closest(".card");if(c){dragId=+c.dataset.id;c.classList.add("drag")}});
+board.addEventListener("dragend",()=>{dragId=null;draw()});
+board.addEventListener("dragover",e=>{const col=e.target.closest(".col");if(col){e.preventDefault();document.querySelectorAll(".col").forEach(x=>x.classList.toggle("over",x===col))}});
+board.addEventListener("drop",e=>{const col=e.target.closest(".col");if(col&&dragId){tasks.find(x=>x.id===dragId).c=col.dataset.c;save();draw()}});
+board.addEventListener("click",e=>{const b=e.target.closest(".mv");if(!b)return;const x=tasks.find(t=>t.id==b.dataset.id);
+  if(b.dataset.d==="x"){tasks=tasks.filter(t=>t!==x)}else{const i=COLS.findIndex(c=>c[0]===x.c)+ +b.dataset.d;x.c=COLS[i][0]} save();draw()});
+f.onsubmit=e=>{e.preventDefault();tasks.push({id:Date.now(),t:t.value.trim(),p:p.value,c:"todo"});save();f.reset();p.value="med";draw()};
+draw();
+</script>
+</body>
+</html>

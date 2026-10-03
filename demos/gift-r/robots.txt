@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /account.html
+Disallow: /login.html
+Disallow: /supabase/
+
+Sitemap: https://giftr.pages.dev/sitemap.xml

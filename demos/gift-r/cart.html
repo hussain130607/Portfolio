@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Cart | Gift R</title>
+  <meta name="description" content="Review the gifts in your Gift R shopping cart." />
+  <meta name="theme-color" content="#e91e63" />
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <!-- Data API host, kept in step with SUPABASE_URL in js/config.js -->
+  <link rel="preconnect" href="https://npophaagzrkjxqoqqtzj.supabase.co" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=2" />
+</head>
+<body data-page="cart">
+  <div id="site-header"></div>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <ol class="breadcrumb" aria-label="Breadcrumb">
+          <li><a href="index.html">Home</a></li>
+          <li aria-current="page">Shopping Cart</li>
+        </ol>
+        <h1>Your Shopping Cart</h1>
+        <p>Review your gifts, add a promo code and get ready to make someone smile.</p>
+      </div>
+    </section>
+
+    <section class="section--tight">
+      <div class="container" id="cartRoot"></div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/dist/umd/supabase.js"></script>
+  <script src="js/config.js?v=2"></script>
+  <script src="js/products.js?v=2"></script>
+  <script src="js/api.js?v=2"></script>
+  <script src="js/main.js?v=2"></script>
+</body>
+</html>

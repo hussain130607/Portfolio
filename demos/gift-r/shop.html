@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop All Gifts | Gift R</title>
+  <meta name="description" content="Browse Gift R's collection of birthday, anniversary, personalized and festive gifts." />
+  <meta name="theme-color" content="#e91e63" />
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <!-- Data API host, kept in step with SUPABASE_URL in js/config.js -->
+  <link rel="preconnect" href="https://npophaagzrkjxqoqqtzj.supabase.co" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=2" />
+</head>
+<body data-page="shop">
+  <div id="site-header"></div>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <ol class="breadcrumb" aria-label="Breadcrumb">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li aria-current="page" id="crumbCurrent">All Gifts</li>
+        </ol>
+        <h1 id="shopTitle">All Gifts</h1>
+        <p id="shopTagline">Explore our full collection of thoughtfully curated gifts.</p>
+      </div>
+    </section>
+
+    <section class="section--tight">
+      <div class="container">
+        <div class="chips" id="catChips" aria-label="Categories"></div>
+
+        <div class="shop-layout">
+          <aside class="filters" aria-label="Filters">
+            <div class="filter-group filter-group--cats">
+              <h3>Categories</h3>
+              <ul class="cat-list" id="catList"></ul>
+            </div>
+            <div class="filter-group">
+              <h3>Max price</h3>
+              <label for="priceRange" class="sr-only">Maximum price</label>
+              <input type="range" id="priceRange" min="10" max="100" step="5" />
+              <div class="range-row"><span id="priceMin">$0</span><strong id="priceValue">$100</strong></div>
+            </div>
+            <div class="filter-group">
+              <h3>Offers</h3>
+              <label class="check"><input type="checkbox" id="onSale" /> On sale only</label>
+              <button type="button" class="btn btn--ghost btn--sm btn--block" id="clearFilters" style="margin-top:18px">Clear all filters</button>
+            </div>
+          </aside>
+
+          <div>
+            <div class="shop-toolbar">
+              <span class="shop-toolbar__count" id="resultCount" aria-live="polite"></span>
+              <div class="shop-toolbar__controls">
+                <div class="search-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                  <label for="searchInput" class="sr-only">Search gifts</label>
+                  <input type="search" id="searchInput" placeholder="Search gifts…" />
+                </div>
+                <label for="sortSelect" class="sr-only">Sort by</label>
+                <select id="sortSelect" class="select">
+                  <option value="featured">Sort: Featured</option>
+                  <option value="price-asc">Price: Low to High</option>
+                  <option value="price-desc">Price: High to Low</option>
+                  <option value="rating">Top Rated</option>
+                  <option value="name">Name: A–Z</option>
+                </select>
+              </div>
+            </div>
+            <div class="product-grid" id="productGrid"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/dist/umd/supabase.js"></script>
+  <script src="js/config.js?v=2"></script>
+  <script src="js/products.js?v=2"></script>
+  <script src="js/api.js?v=2"></script>
+  <script src="js/main.js?v=2"></script>
+</body>
+</html>

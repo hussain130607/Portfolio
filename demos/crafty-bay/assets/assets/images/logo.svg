@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Crafty Bay mark: shopping bag -->
+  <g fill="none" stroke="#21BFBD" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M30 42 h60 l-5 55 a8 8 0 0 1 -8 7 h-34 a8 8 0 0 1 -8 -7 z"/>
+    <path d="M45 42 v-8 a15 15 0 0 1 30 0 v8"/>
+  </g>
+  <circle cx="60" cy="70" r="6" fill="#21BFBD"/>
+  <path d="M38 88 q11 -8 22 0 t22 0" fill="none" stroke="#21BFBD" stroke-width="4" stroke-linecap="round" opacity="0.55"/>
+</svg>

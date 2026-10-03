@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dart Quiz</title>
+<style>
+:root{--bg:#f2f5fb;--card:#fff;--line:#d9e0ee;--fg:#111a2e;--muted:#5a6680;--acc:#0175c2;--ok:#138a52;--bad:#c23b3b;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#0b1020;--card:#131a2e;--line:#253052;--fg:#e8edf8;--muted:#98a4c0;--acc:#40c4ff;--ok:#3ddc97;--bad:#ff7070;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 system-ui,"Segoe UI",sans-serif;padding:16px}
+.app{max-width:600px;margin:0 auto;display:grid;gap:14px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+h1{margin:0;font-size:20px}
+.prog{height:6px;background:var(--line);border-radius:9px;overflow:hidden}.prog i{display:block;height:100%;background:var(--acc);transition:width .3s}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:14px}
+pre{margin:0;background:#0d1326;color:#d6e4ff;padding:14px;border-radius:10px;overflow-x:auto;font:13px/1.6 ui-monospace,Consolas,monospace}
+.q{font-weight:650;font-size:17px}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;font:inherit;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--acc)}
+.opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--card))}
+.opt.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,var(--card))}
+.why{font-size:14px;color:var(--muted);border-left:3px solid var(--acc);padding-left:10px}
+.btn{justify-self:end;font:600 15px system-ui;border:0;border-radius:10px;padding:10px 18px;background:var(--acc);color:#fff;cursor:pointer}
+.score{font-size:42px;font-weight:800;font-variant-numeric:tabular-nums}
+.pill{font:600 12px ui-monospace,monospace;color:var(--acc)}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top"><h1>Dart &amp; Flutter Quiz</h1><span class="pill" id="count"></span></div>
+  <div class="prog"><i id="bar"></i></div>
+  <div class="card" id="card"></div>
+</div>
+<script>
+const Q=[
+ {q:"What does this print?",code:"void main() {\n  final list = [1, 2, 3];\n  list.add(4);\n  print(list.length);\n}",o:["Error: final can't change","3","4"],a:2,why:"final stops you reassigning the variable, but the list itself is still mutable. Use const for a deeply immutable list."},
+ {q:"Which operator returns the right side only when the left side is null?",o:["?.","??","!"],a:1,why:"a ?? b gives a unless a is null, then b. ?. is null-aware member access and ! asserts non-null."},
+ {q:"Which widget should you use when its look depends on data that changes over time?",o:["StatelessWidget","StatefulWidget","InheritedWidget only"],a:1,why:"StatefulWidget keeps a State object; call setState() to rebuild when data changes."},
+ {q:"In what order are the letters printed?",code:"import 'dart:async';\n\nvoid main() {\n  print('A');\n  Future(() => print('B'));\n  scheduleMicrotask(() => print('C'));\n  print('D');\n}",o:["A B C D","A D C B","A D B C"],a:1,why:"Synchronous code runs first (A, D). Then the microtask queue drains (C) before the event queue runs the Future (B)."},
+ {q:"In Riverpod, which provider exposes a value that can be updated from the UI?",o:["Provider","StateProvider / NotifierProvider","FutureProvider"],a:1,why:"Provider is read-only. StateProvider (simple) or NotifierProvider (logic) hold state you can change."},
+ {q:"What does const before a widget constructor give you?",o:["Faster hot reload","A compile-time canonical instance Flutter can skip rebuilding","Null safety"],a:1,why:"const widgets are created once at compile time and are identical across rebuilds, so Flutter can skip them."},
+ {q:"Which Firestore call listens for live updates?",o:["get()","snapshots()","listen()"],a:1,why:"collection.snapshots() returns a Stream that emits each time the data changes. Pair it with StreamBuilder."}
+];
+let i=0,score=0;
+function show(){
+  count.textContent=`${Math.min(i+1,Q.length)} / ${Q.length}`; bar.style.width=(i/Q.length*100)+"%";
+  if(i>=Q.length){ card.innerHTML=`<div class="pill">Result</div><div class="score">${score} / ${Q.length}</div><p>${score>=6?"Strong result.":score>=4?"Good result. Check the explanations for the ones you missed.":"Check the explanations above and try again."}</p><button class="btn" id="again">Try again</button>`; again.onclick=()=>{i=0;score=0;show()}; return; }
+  const x=Q[i];
+  card.innerHTML=`<div class="q">${x.q}</div>${x.code?`<pre>${x.code.replace(/</g,"&lt;")}</pre>`:""}<div class="opts">${x.o.map((t,k)=>`<button class="opt" data-k="${k}">${t}</button>`).join("")}</div>`;
+  card.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+    const k=+b.dataset.k; if(k===x.a) score++;
+    card.querySelectorAll(".opt").forEach(o=>{o.disabled=true; if(+o.dataset.k===x.a) o.classList.add("ok"); else if(o===b) o.classList.add("bad")});
+    card.insertAdjacentHTML("beforeend",`<div class="why">${x.why}</div><button class="btn" id="next">${i===Q.length-1?"See result":"Next"}</button>`);
+    next.onclick=()=>{i++;show()}; next.focus();
+  });
+}
+show();
+</script>
+</body>
+</html>
