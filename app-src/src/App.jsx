@@ -7,6 +7,7 @@ import SKILLS from './skills.json'
 const EMAIL = 'hussainmuhammadabdullah130607@gmail.com'
 const GITHUB = 'https://github.com/hussain130607'
 const LINKEDIN = 'https://www.linkedin.com/in/hussain130607/'
+const YOUTUBE = 'https://www.youtube.com/@hmaidev'
 
 const DEMOS = {
   giftr: { title: 'Gift R', sub: 'Storefront with sample data', src: 'demos/gift-r/index.html', kind: 'web' },
@@ -415,6 +416,7 @@ function Contact() {
             <Btn href={`mailto:${EMAIL}`}>Send email</Btn>
             <Btn href={GITHUB} target="_blank" rel="noopener noreferrer">GitHub</Btn>
             <Btn href={LINKEDIN} target="_blank" rel="noopener noreferrer">LinkedIn</Btn>
+            <Btn href={YOUTUBE} target="_blank" rel="noopener noreferrer">YouTube</Btn>
           </div>
         </Tilt>
       </Reveal>
