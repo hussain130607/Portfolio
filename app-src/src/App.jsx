@@ -394,6 +394,20 @@ function Certificates({ openImg }) {
           <p className="mt-6 text-white/60">Certificate of Assessment, Batch 15. Credential ID A48287.</p>
         </Reveal>
       </div>
+      <div className="mt-14 grid items-center gap-8 md:mt-20 md:grid-cols-[0.8fr_1.2fr]">
+        <Reveal from="left" className="md:order-1">
+          <h3 className="font-display text-3xl font-bold md:text-4xl">Course completed</h3>
+          <p className="mt-2 text-white/55">Ostad · Certificate of Completion · Batch 15</p>
+          <p className="mt-6 text-white/60">Finished the full App Development with Flutter course at Ostad. Credential ID C48508.</p>
+        </Reveal>
+        <Reveal from="right" delay={0.1} className="md:order-2">
+          <Tilt className="glass rounded-[28px] p-3 sm:p-4" max={10}>
+            <button type="button" onClick={() => openImg('assets/ostad-completion-hd.webp', 'Ostad Certificate of Completion, full size')} className="block w-full" aria-label="View Ostad Certificate of Completion full size">
+              <img src="assets/ostad-completion.webp" alt="Ostad Certificate of Completion, App Development with Flutter" width="1200" height="849" loading="lazy" decoding="async" className="w-full rounded-xl" />
+            </button>
+          </Tilt>
+        </Reveal>
+      </div>
     </section>
   )
 }
