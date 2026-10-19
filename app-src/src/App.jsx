@@ -15,6 +15,7 @@ const DEMOS = {
   ledger: { title: 'Pocket Ledger', sub: 'Saved in your browser', src: 'demos/pocket-ledger/index.html', kind: 'phone' },
   board: { title: 'Sprint Board', sub: 'Drag cards between columns', src: 'demos/taskboard/index.html', kind: 'web' },
   quiz: { title: 'Dart and Flutter Quiz', sub: 'Seven questions', src: 'demos/dart-quiz/index.html', kind: 'web' },
+  voice: { title: 'Ghost AI Voice Studio', sub: 'Text to speech in your browser', src: 'demos/ghost-voice/index.html', kind: 'web' },
 }
 
 const NAV = [['work', 'Work'], ['apps', 'Apps'], ['about', 'About'], ['skills', 'Skills'], ['certificates', 'Certificates'], ['contact', 'Contact']]
@@ -210,7 +211,7 @@ function LinkBtn({ children, onClick, href }) {
 function Work({ openDemo, openImg }) {
   return (
     <section id="work" className="mx-auto max-w-6xl px-4 py-16 sm:px-5 md:px-8 md:py-24">
-      <SectionHead title="Selected work" sub="Gift R and Crafty Bay run in your browser. Click a screenshot to try them." />
+      <SectionHead title="Selected work" sub="Gift R, Crafty Bay and the voice studio run in your browser. Click a screenshot to try them." />
 
       <Project i={0} title="Gift R" kind="Online store and admin dashboard · 2026"
         body="An online store for a gift shop in Cumilla. Customers browse by occasion, apply promo codes and check out. The owner manages products, orders, promotions and store settings from an admin dashboard. Order totals are calculated in the database, so prices can't be changed from the browser."
@@ -248,14 +249,24 @@ function Work({ openDemo, openImg }) {
         </div>
       </Project>
 
-      <Project i={3} title="Attendance Tracker" kind="Flutter app · in development"
+      <Project i={3} title="Ghost AI Voice Studio" kind="Text to speech in the browser · Kokoro-82M"
+        body="Type a script and get a natural English voice-over. The Kokoro-82M voice model runs inside the browser with ONNX Runtime Web, so nothing you type is sent to a server. It has twelve voices and adjustable speed, and you can save the result as MP3 or WAV. The 92 MB model downloads once and is then cached in the browser."
+        stack={['JavaScript', 'Kokoro-82M', 'ONNX Runtime Web', 'WebAssembly', 'Web Worker', 'IndexedDB']}
+        links={<><LinkBtn onClick={() => openDemo('voice')}>Try the live demo <Arrow /></LinkBtn><span className="text-sm text-white/45">The first voice takes a moment while the model loads.</span></>}>
+        <motion.button type="button" onClick={() => openDemo('voice')} whileHover={{ scale: 1.015, y: -6 }} transition={{ type: 'spring', stiffness: 200, damping: 18 }}
+          className="block w-full overflow-hidden rounded-2xl ring-1 ring-white/15" aria-label="Open Ghost AI Voice Studio demo">
+          <img src="assets/shots/voice-studio.webp" alt="Ghost AI Voice Studio with a generated voice-over ready to play and save" width="2176" height="1140" loading="lazy" decoding="async" className="w-full" />
+        </motion.button>
+      </Project>
+
+      <Project i={4} title="Attendance Tracker" kind="Flutter app · in development"
         body="Attendance for university classes. The teacher's phone acts as a Bluetooth beacon and each student's phone checks in every 30 seconds, so the app records how long a student was actually in class. GPS is used as a second check. It has admin, teacher and student roles, with CSV class rosters."
         stack={['Flutter', 'Riverpod', 'Bluetooth LE', 'Firebase', 'Cloud Functions']}>
         <Phones onOpen={openImg} shots={[['assets/shots/attendance-1.webp', 'Attendance Tracker sign-in'], ['assets/shots/attendance-2.webp', 'Teacher home'], ['assets/shots/attendance-3.webp', 'Live class with the room radar'], ['assets/shots/attendance-4.webp', 'Course roster with join code']]} />
         <p className="mt-4 text-sm text-white/45">Running on its demo backend. Click a screen to see it full size. <a className="underline hover:text-white" href={`${GITHUB}/Attendy`} target="_blank" rel="noopener noreferrer">Source code</a></p>
       </Project>
 
-      <Project i={4} title="Dart & Flutter: Zero to Senior" kind="Two books · Bangla and English · 2026"
+      <Project i={5} title="Dart & Flutter: Zero to Senior" kind="Two books · Bangla and English · 2026"
         body="A two-volume learning set for Dart and Flutter that I planned and produced. The Companion Guide explains every topic with an everyday analogy, a diagram and code explained line by line. The Practice Workbook has drills, real-world challenges, refactoring tasks and debugging exercises for the same chapter. The books are private; five pages of each are open as a preview."
         stack={['Companion Guide', 'Practice Workbook', '75 chapters each', '140+ diagrams', 'Bangla and English']}
         links={<LinkBtn href="book/">See the preview <Arrow /></LinkBtn>}>
