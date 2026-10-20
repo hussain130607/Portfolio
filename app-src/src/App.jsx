@@ -387,7 +387,7 @@ function Certificates({ openImg }) {
         <Reveal from="left">
           <Tilt className="glass rounded-[28px] p-4" max={14}>
             <button type="button" onClick={() => openImg('assets/ostad-certificate-hd.jpg', 'Ostad certificate, full size')} className="block w-full" aria-label="View Ostad certificate full size">
-              <img src="assets/ostad-certificate.jpg" alt="Ostad Certificate of Assessment, App Development with Flutter" loading="lazy" className="w-full rounded-xl" />
+              <img src="assets/ostad-certificate.webp" alt="Ostad Certificate of Assessment, App Development with Flutter" width="1400" height="1980" loading="lazy" decoding="async" className="w-full rounded-xl" />
             </button>
           </Tilt>
         </Reveal>
@@ -414,7 +414,7 @@ function Certificates({ openImg }) {
         <Reveal from="right" delay={0.1} className="md:order-2">
           <Tilt className="glass rounded-[28px] p-3 sm:p-4" max={10}>
             <button type="button" onClick={() => openImg('assets/ostad-completion-hd.webp', 'Ostad Certificate of Completion, full size')} className="block w-full" aria-label="View Ostad Certificate of Completion full size">
-              <img src="assets/ostad-completion.webp" alt="Ostad Certificate of Completion, App Development with Flutter" width="1200" height="849" loading="lazy" decoding="async" className="w-full rounded-xl" />
+              <img src="assets/ostad-completion.webp" alt="Ostad Certificate of Completion, App Development with Flutter" width="1800" height="1273" loading="lazy" decoding="async" className="w-full rounded-xl" />
             </button>
           </Tilt>
         </Reveal>
