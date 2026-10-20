@@ -303,10 +303,10 @@ function Apps({ openDemo }) {
         {apps.map(([id, t, d, img], k) => (
           <Reveal key={id} from={['left', 'spin', 'right'][k]} delay={k * 0.1}>
             <Tilt className="glass flex h-full flex-col rounded-[24px] p-3" max={12}>
-              <button type="button" onClick={() => openDemo(id)} className="block overflow-hidden rounded-[18px] ring-1 ring-white/10" aria-label={`Open ${t}`} style={{ transform: 'translateZ(30px)' }}>
+              <button type="button" onClick={() => openDemo(id)} className="block overflow-hidden rounded-[18px] ring-1 ring-white/10" aria-label={`Open ${t}`}>
                 <img src={img} alt={t} loading="lazy" className="aspect-[4/3] w-full object-cover object-top transition-transform duration-500 hover:scale-105" />
               </button>
-              <div className="flex flex-1 flex-col p-3" style={{ transform: 'translateZ(20px)' }}>
+              <div className="flex flex-1 flex-col p-3">
                 <h3 className="font-display text-xl font-bold">{t}</h3>
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-white/60">{d}</p>
                 <div className="mt-4"><LinkBtn onClick={() => openDemo(id)}>Open app <Arrow /></LinkBtn></div>
@@ -386,7 +386,7 @@ function Certificates({ openImg }) {
       <div className="grid items-center gap-8 md:grid-cols-[0.9fr_1.1fr]">
         <Reveal from="left">
           <Tilt className="glass rounded-[28px] p-4" max={14}>
-            <button type="button" onClick={() => openImg('assets/ostad-certificate-hd.jpg', 'Ostad certificate, full size')} className="block w-full" aria-label="View Ostad certificate full size" style={{ transform: 'translateZ(40px)' }}>
+            <button type="button" onClick={() => openImg('assets/ostad-certificate-hd.jpg', 'Ostad certificate, full size')} className="block w-full" aria-label="View Ostad certificate full size">
               <img src="assets/ostad-certificate.jpg" alt="Ostad Certificate of Assessment, App Development with Flutter" loading="lazy" className="w-full rounded-xl" />
             </button>
           </Tilt>

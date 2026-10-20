@@ -33,12 +33,16 @@ const FROM = SMALL ? {
 
 export function Reveal({ from = 'bottom', delay = 0, className = '', children, as = 'div', amount = 0.2, ...rest }) {
   const reduce = useReducedMotion()
+  const [done, setDone] = useState(false)
   const M = motion[as]
   const start = FROM[from]
+  /* Once settled, drop the perspective so the element leaves its 3D layer: Chrome keeps a 3D-transformed
+     layer at the resolution it was first drawn at, which is what made the screenshots look soft. */
   return (
     <M
       className={className}
-      style={SMALL ? undefined : { transformPerspective: 1200 }}
+      style={SMALL || done ? undefined : { transformPerspective: 1200 }}
+      onAnimationComplete={() => setDone(true)}
       initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.94, ...start }}
       whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0, rotateX: 0, rotateY: 0, scale: 1 }}
       viewport={{ once: true, amount: SMALL ? Math.min(amount, 0.08) : amount, margin: '0px 0px 12% 0px' }}
@@ -60,6 +64,10 @@ export function Tilt({ children, className = '', max = 10, lift = 26, as = 'div'
   const z = useSpring(0, { stiffness: 180, damping: 20 })
   const active = fine && !reduce
   const M = motion[as]
+  /* 3D only while the pointer is on the card (and until it has eased back), so at rest the card and its
+     images are drawn flat and sharp. */
+  const [tilting, setTilting] = useState(false)
+  const settle = useRef(0)
 
   function move(e) {
     const el = ref.current; if (!el) return
@@ -68,11 +76,18 @@ export function Tilt({ children, className = '', max = 10, lift = 26, as = 'div'
     el.style.setProperty('--mx', `${px * 100}%`)
     el.style.setProperty('--my', `${py * 100}%`)
     if (!active) return
+    clearTimeout(settle.current)
+    if (!tilting) setTilting(true)
     ry.set((px - 0.5) * max * 2)
     rx.set(-(py - 0.5) * max * 2)
     z.set(lift)
   }
-  function leave() { rx.set(0); ry.set(0); z.set(0) }
+  function leave() {
+    rx.set(0); ry.set(0); z.set(0)
+    clearTimeout(settle.current)
+    settle.current = setTimeout(() => setTilting(false), 700)
+  }
+  useEffect(() => () => clearTimeout(settle.current), [])
 
   return (
     <M
@@ -80,7 +95,7 @@ export function Tilt({ children, className = '', max = 10, lift = 26, as = 'div'
       onPointerMove={move}
       onPointerLeave={leave}
       className={`spot ${className}`}
-      style={{ rotateX: rx, rotateY: ry, z, transformPerspective: 1000, transformStyle: 'preserve-3d' }}
+      style={tilting ? { rotateX: rx, rotateY: ry, z, transformPerspective: 1000, transformStyle: 'preserve-3d' } : undefined}
       {...rest}
     >
       {children}
